@@ -3,17 +3,19 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Main {
-    public static void main(String[] args){
+    /** metodo main */
+    public static void main(String[] args) {
+        // ingresar los datos de los elefantes y ponerlos en una lista
         int i = 1;
         String s;
         Scanner teclado = new Scanner(System.in);
-        ArrayList<Elefante> listaElefante = new ArrayList<Elefante>();		
-		while (true) {
+        ArrayList<Elefante> listaElefante = new ArrayList<Elefante>();
+        while (true) {
             int s1;
             int s2;
-			s = teclado.nextLine();
-			if (s==null || s.equals("")) {
-				break;
+            s = teclado.nextLine();
+            if (s == null || s.equals("")) {
+                break;
             }
             Scanner scan = new Scanner(s);
             s1 = scan.nextInt();
@@ -24,9 +26,23 @@ public class Main {
             scan.close();
         }
         teclado.close();
-        
-        for(Elefante j : listaElefante){
-            System.out.println(j.getPeso());
+
+        while (!(listaElefante.isEmpty())) {
+            // menor peso
+            Elefante elMenorPeso = listaElefante.get(0);
+            for (Elefante j : listaElefante) {
+                if(elMenorPeso.getPeso() > j.getPeso()){
+                    elMenorPeso = j;
+                }
+            }
+            Elefante elMayorCi = elMenorPeso;
+
+            for (Elefante j : listaElefante) {
+                if(elMayorCi.getCi() < j.getCi()){
+                    elMayorCi = j;
+                }
+            }
+            
         }
     }
 }

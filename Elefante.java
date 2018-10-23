@@ -2,7 +2,7 @@ public class Elefante{
     private int peso;
     private int ci;
     private int pocision;
-    public void Elefante(int peso,int ci,int pocision){
+    public Elefante(int peso,int ci,int pocision){
         this.peso = peso;
         this.ci = ci;
         this.pocision = pocision;

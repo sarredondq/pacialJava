@@ -17,12 +17,12 @@ public class Elefante{
         this.pocision = pocision;
     }
     public int getPeso(){
-        this.peso;
+        return this.peso;
     }
     public int getCi(){
-        this.ci;
+        return this.ci;
     }
     public int getPosicion(){
-        this.pocision;
+        return this.pocision;
     }
 }

@@ -24,7 +24,7 @@ public class Main {
             scan.close();
         }
         teclado.close();
-        System.out.println(listaElefante.get(0).getPeso());
+        
         for(Elefante j : listaElefante){
             System.out.println(j.getPeso());
         }

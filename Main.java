@@ -25,7 +25,7 @@ public class Main {
      */
     public static void main(String[] args) throws IOException {
         // ingresar los datos de los elefantes y ponerlos en una lista
-        int i = 1;
+        int poc = 1;
         String s;
         BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
         ArrayList<Elefante> listaElefante = new ArrayList<>();
@@ -39,9 +39,9 @@ public class Main {
             StringTokenizer scan = new StringTokenizer(s);
             s1 = Integer.parseInt(scan.nextToken());
             s2 = Integer.parseInt(scan.nextToken());
-            Elefante tem = new Elefante(s1, s2, i);
+            Elefante tem = new Elefante(s1, s2, poc);
             listaElefante.add(tem);
-            i++;
+            poc++;
         }
         Elefante[] arrPorPeso = listaElefante.toArray(new Elefante[listaElefante.size()]);
         Arrays.sort(arrPorPeso);
@@ -49,6 +49,7 @@ public class Main {
         lisTemp[0] = 1;
 
         for (int j = 1; j < lisTemp.length; j++) {
+            lisTemp[j]=Math.max(1, lisTemp[j]);
             for (int k = 0; k < j; k++) {
                 if (arrPorPeso[j].getCi() < arrPorPeso[k].getCi() && arrPorPeso[j].getPeso() > arrPorPeso[k].getPeso()) {
                     lisTemp[j] = Math.max(lisTemp[k] + 1, lisTemp[j]);
@@ -60,5 +61,19 @@ public class Main {
             max = Math.max(j, max);
         }
         System.out.println(max);
+        int[] solucion = new int[max];
+
+        boolean primero = true;
+        int ultimo = 0;
+        for (int i = lisTemp.length - 1; i >= 0 && max > 0; i--) {
+            if (lisTemp[i] == max && (primero || ultimo < arrPorPeso[i].getCi())) {
+                ultimo = arrPorPeso[i].getCi();
+                solucion[--max] = arrPorPeso[i].getPosicion();
+                primero = false;
+            }
+        }
+        for (int i : solucion) {
+            System.out.println(i);
+        }
     }
 }

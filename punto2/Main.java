@@ -1,3 +1,13 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ *
+ * @author santiago
+ */
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -7,36 +17,36 @@ import java.util.StringTokenizer;
 
 public class Main {
 
-    public static class Turtle implements Comparable<Turtle> {
+    public static class Tortuga implements Comparable<Tortuga> {
 
-        int weight;
-        int strength;
+        int peso;
+        int fuerza;
 
         @Override
-        public int compareTo(Turtle o) {
-            if (this.strength == o.strength) {
-                return this.weight - o.weight;
+        public int compareTo(Tortuga o) {
+            if (this.fuerza == o.fuerza) {
+                return this.peso - o.peso;
             }
-            return (this.strength) - (o.strength);
+            return (this.fuerza) - (o.fuerza);
         }
     }
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        ArrayList<Turtle> list = new ArrayList<>();
-        String strLine;
+        BufferedReader teclado = new BufferedReader(new InputStreamReader(System.in));
+        ArrayList<Tortuga> listaTortuga = new ArrayList<>();
+        String s;
         while (true) {
-            strLine = br.readLine();
-            if (strLine == null || strLine.equals("")) {
+            s = teclado.readLine();
+            if (s == null || s.equals("")) {
                 break;
             }
-            StringTokenizer scan = new StringTokenizer(strLine);
-            Turtle t = new Turtle();
-            t.weight = Integer.parseInt(scan.nextToken());
-            t.strength = Integer.parseInt(scan.nextToken()) - t.weight;
-            list.add(t);
+            StringTokenizer scan = new StringTokenizer(s);
+            Tortuga t = new Tortuga();
+            t.peso = Integer.parseInt(scan.nextToken());
+            t.fuerza = Integer.parseInt(scan.nextToken()) - t.peso;
+            listaTortuga.add(t);
         }
-        Turtle[] arr = list.toArray(new Turtle[list.size()]);
+        Tortuga[] arr = listaTortuga.toArray(new Tortuga[listaTortuga.size()]);
         Arrays.sort(arr);
         
         int N = arr.length;
@@ -46,13 +56,13 @@ public class Main {
                 dp[i][j] = (j == 0 ? 0 : Integer.MAX_VALUE);
             }
         }
-        dp[0][1] = arr[0].weight;
+        dp[0][1] = arr[0].peso;
         for (int i = 1; i < N; i++) {
             for (int j = 1; j <= i + 1; j++) {
                 dp[i][j] = Math.min(dp[i][j], dp[i - 1][j]);
-                if (arr[i].strength > dp[i - 1][j - 1]) {
+                if (arr[i].fuerza > dp[i - 1][j - 1]) {
                     dp[i][j] = Math.min(dp[i][j],
-                            dp[i - 1][j - 1] + arr[i].weight);
+                            dp[i - 1][j - 1] + arr[i].peso);
                 }
             }
         }
